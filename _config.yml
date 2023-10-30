@@ -6,8 +6,8 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-title                    : "Bochuan`s homepage"
-description              : "Bochuan`s homepage"
+title                    : "Bochuan’s homepage"
+description              : "Second-year Ph.D. Student at Pennsylvania State University"
 repository               : "AAAAAAsuka/aaaaaasuka.github.io"
 google_scholar_stats_use_cdn : false
 
@@ -23,7 +23,7 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 author:
   name             : "Bochuan Cao"
   avatar           : "images/android-chrome-512x512.png"
-  bio              : "PSU"
+  bio              : "Pennsylvania State University"
   location         : "State College, PA, US"
   employer         :
   pubmed           : 
@@ -37,7 +37,7 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : https://github.com/AAAAAAsuka
+  github           : AAAAAAsuka
   google_plus      :
   keybase          :
   instagram        :

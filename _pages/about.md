@@ -16,6 +16,7 @@ redirect_from:
 {% assign url = gsDataBaseUrl | append: "google-scholar-stats/gs_data_shieldsio.json" %}
 
 <span class='anchor' id='about-me'></span>
+# About Me
 
 I am currently a second-year Ph.D. student at Pennsylvania State University, advised by [Dr.Jinghui Chen](https://jinghuichen.github.io/). I earned my Bachelor's degree from the University of Electronic Science and Technology in 2022. My research interests include trustworthiness and security issues in large language models, safety and privacy issues in image generation models, and interpretation and evaluation of large pre-trained models. I warmly welcome anyone to discuss research work with me!
 
@@ -44,14 +45,14 @@ I am currently a second-year Ph.D. student at Pennsylvania State University, adv
 - [Defending Against Alignment-Breaking Attacks via Robustly Aligned LLM](https://arxiv.org/abs/2309.14348), **Bochuan Cao**, Yuanpu Cao, Lu Lin, Jinghui Chen. *arXiv 2309.14348*.
 - [On the Safety of Open-Sourced Large Language Models: Does Alignment Really Prevent Them From Being Misused?](https://arxiv.org/abs/2310.01581), Hangfan Zhang, Zhimeng Guo, Huaisheng Zhu, **Bochuan Cao**, Lu Lin, Jinyuan Jia, Jinghui Chen, Dinghao Wu. *arXiv 2310.01581*.
 - [Wild-Time: A Benchmark of in-the-Wild Distribution Shift over Time](https://arxiv.org/abs/2211.14238), Huaxiu Yao, Caroline Choi, **Bochuan Cao**, Yoonho Lee, Pang Wei Koh, Chelsea Finn. In Proceedings of the *36th Advances in Neural Information Processing Systems (NeurIPS), New Orleans, Louisiana, USA, 2022*.
-- [OmniLytics: A Blockchain-based Secure Data Market for Decentralized Machine Learning](https://arxiv.org/abs/2107.05252), Jiacheng Liang, Songze Li, \textbf{Bochuan Cao}, Wensi Jiang, Chaoyang He. In Proceedings of the *International Workshop on Federated Learning for User Privacy and Data Confidentiality in Conjunction with ICML 2021*.
+- [OmniLytics: A Blockchain-based Secure Data Market for Decentralized Machine Learning](https://arxiv.org/abs/2107.05252), Jiacheng Liang, Songze Li, **Bochuan Cao**, Wensi Jiang, Chaoyang He. In Proceedings of the *International Workshop on Federated Learning for User Privacy and Data Confidentiality in Conjunction with ICML 2021*.
 
 # 🎖 Honors and Awards
 - *2023.10* NeurIPS Scholar Award.
-- *2022.06* Outstanding Graduate in University of Electronic Science and Technology of China.
+- *2022.06* Outstanding Undergraduate Graduates in University of Electronic Science and Technology of China.
 
 # 📖 Educations
-- *2019.06 - now*, Pennsylvania State University (PSU), College of Information Sciences and Technology, Doctor of Philosophy. 
+- *2022.06 - now*, Pennsylvania State University (PSU), College of Information Sciences and Technology, Doctor of Philosophy. 
 - *2018.09 - 2022.06*, University of Electronic Science and Technology of China (UESTC), School of Automation Engineering, Bachelor of Engineering
 
 <!-- # 💬 Invited Talks
