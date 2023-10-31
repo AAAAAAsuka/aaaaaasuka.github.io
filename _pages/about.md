@@ -41,7 +41,7 @@ I am currently a second-year Ph.D. student at Pennsylvania State University, adv
 </div>
 </div> -->
 
-- [IMPRESS: Evaluating the Resilience of Imperceptible Perturbations Against Unauthorized Data Usage in Diffusion-Based Generative AI](https://github.com), **Bochuan Cao**,  Changjiang Li, Ting Wang, Jinyuan Jia, Bo Li, Jinghui Chen, In Proceedings of the *37th Conference on Neural Information Processing Systems (NeurIPS), New Orleans, Louisiana, USA, 2023*.
+- [IMPRESS: Evaluating the Resilience of Imperceptible Perturbations Against Unauthorized Data Usage in Diffusion-Based Generative AI](https://arxiv.org/abs/2310.19248), **Bochuan Cao**,  Changjiang Li, Ting Wang, Jinyuan Jia, Bo Li, Jinghui Chen, In Proceedings of the *37th Conference on Neural Information Processing Systems (NeurIPS), New Orleans, Louisiana, USA, 2023*.
 - [Defending Against Alignment-Breaking Attacks via Robustly Aligned LLM](https://arxiv.org/abs/2309.14348), **Bochuan Cao**, Yuanpu Cao, Lu Lin, Jinghui Chen. *arXiv 2309.14348*.
 - [On the Safety of Open-Sourced Large Language Models: Does Alignment Really Prevent Them From Being Misused?](https://arxiv.org/abs/2310.01581), Hangfan Zhang, Zhimeng Guo, Huaisheng Zhu, **Bochuan Cao**, Lu Lin, Jinyuan Jia, Jinghui Chen, Dinghao Wu. *arXiv 2310.01581*.
 - [Wild-Time: A Benchmark of in-the-Wild Distribution Shift over Time](https://arxiv.org/abs/2211.14238), Huaxiu Yao, Caroline Choi, **Bochuan Cao**, Yoonho Lee, Pang Wei Koh, Chelsea Finn. In Proceedings of the *36th Advances in Neural Information Processing Systems (NeurIPS), New Orleans, Louisiana, USA, 2022*.
