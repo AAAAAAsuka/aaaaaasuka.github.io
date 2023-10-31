@@ -18,7 +18,7 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 # About Me
 
-I am currently a second-year Ph.D. student at Pennsylvania State University, advised by [Dr.Jinghui Chen](https://jinghuichen.github.io/). I earned my Bachelor's degree from the University of Electronic Science and Technology of China(UESTC) in 2022. My research interests include trustworthiness and security issues in large language models, safety and privacy issues in image generation models, and interpretation and evaluation of large pre-trained models. I warmly welcome anyone to discuss research work with me!
+I am currently a second-year Ph.D. student at Pennsylvania State University, advised by [Dr.Jinghui Chen](https://jinghuichen.github.io/). I earned my Bachelor's degree from the University of Electronic Science and Technology of China(UESTC) in 2022. My research interests include trustworthiness and security issues in large language models, safety and privacy issues in image generation models, and interpretation and evaluation of large pre-trained models. I warmly welcome anyone to discuss research works with me!
 
 <!-- My research interest includes neural machine translation and computer vision. I have published more than 100 papers at the top international AI conferences with total <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'>google scholar citations <strong><span id='total_cit'>260000+</span></strong></a> (You can also use google scholar badge <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>). -->
 
