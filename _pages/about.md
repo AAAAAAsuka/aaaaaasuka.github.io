@@ -42,8 +42,8 @@ I am currently a second-year Ph.D. student at Pennsylvania State University, adv
 </div> -->
 
 
-- [Stealthy and Persistent Unalignment on Large Language Models via Backdoor Injections](https://arxiv.org/abs/2312.00027), Yuanpu Cao, **Bochuan Cao**, Jinghui Chen. *arXiv 2309.14348*. 
-- On Defending Contrastive Learning against Backdoor Attacks, Changjiang Li, Ren Pang, **Bochuan Cao**, Zhaohan Xi, Jinghui Chen, Shouling Ji, Ting Wang. In Proceedings of the *the 33rd USENIX Security Symposium (USENIX Security '24), PHILADELPHIA, PA, USA*.
+- [Stealthy and Persistent Unalignment on Large Language Models via Backdoor Injections](https://arxiv.org/abs/2312.00027), Yuanpu Cao, **Bochuan Cao**, Jinghui Chen. *arXiv 2312.00027*. 
+- [On Defending Contrastive Learning against Backdoor Attacks](https://arxiv.org/abs/2312.09057), Changjiang Li, Ren Pang, **Bochuan Cao**, Zhaohan Xi, Jinghui Chen, Shouling Ji, Ting Wang. In Proceedings of the *the 33rd USENIX Security Symposium (USENIX Security '24), PHILADELPHIA, PA, USA*.
 - [IMPRESS: Evaluating the Resilience of Imperceptible Perturbations Against Unauthorized Data Usage in Diffusion-Based Generative AI](https://arxiv.org/abs/2310.19248), **Bochuan Cao**,  Changjiang Li, Ting Wang, Jinyuan Jia, Bo Li, Jinghui Chen, In Proceedings of the *37th Conference on Neural Information Processing Systems (NeurIPS), New Orleans, Louisiana, USA, 2023*. \[[codes](https://github.com/AAAAAAsuka/Impress/tree/main)\]
 - [Defending Against Alignment-Breaking Attacks via Robustly Aligned LLM](https://arxiv.org/abs/2309.14348), **Bochuan Cao**, Yuanpu Cao, Lu Lin, Jinghui Chen. *arXiv 2309.14348*. \[[codes](https://github.com/AAAAAAsuka/llm_defends)\]
 - [On the Safety of Open-Sourced Large Language Models: Does Alignment Really Prevent Them From Being Misused?](https://arxiv.org/abs/2310.01581), Hangfan Zhang, Zhimeng Guo, Huaisheng Zhu, **Bochuan Cao**, Lu Lin, Jinyuan Jia, Jinghui Chen, Dinghao Wu. *arXiv 2310.01581*.
