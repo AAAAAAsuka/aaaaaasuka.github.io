@@ -42,9 +42,9 @@ I am currently a second-year Ph.D. student at Pennsylvania State University, adv
 </div> -->
 
 
-- [Stealthy and Persistent Unalignment on Large Language Models via Backdoor Injections](https://arxiv.org/abs/2312.00027), Yuanpu Cao, **Bochuan Cao**, Jinghui Chen. *arXiv 2312.00027*. 
+- [Stealthy and Persistent Unalignment on Large Language Models via Backdoor Injections](https://arxiv.org/abs/2312.00027), Yuanpu Cao, **Bochuan Cao**, Jinghui Chen. *arXiv 2312.00027*. In Proceedings of the 2024 Annual Conference of the North American Chapter of the Association for Computational Linguistics (NAACL), Mexico City, Mexico, 2024.
 - [On the Difficulty of Defending Contrastive Learning against Backdoor Attacks](https://arxiv.org/abs/2312.09057), Changjiang Li, Ren Pang, **Bochuan Cao**, Zhaohan Xi, Jinghui Chen, Shouling Ji, Ting Wang. In Proceedings of the *the 33rd USENIX Security Symposium (USENIX Security '24), PHILADELPHIA, PA, USA*.
-- [IMPRESS: Evaluating the Resilience of Imperceptible Perturbations Against Unauthorized Data Usage in Diffusion-Based Generative AI](https://arxiv.org/abs/2310.19248), **Bochuan Cao**,  Changjiang Li, Ting Wang, Jinyuan Jia, Bo Li, Jinghui Chen, In Proceedings of the *37th Conference on Neural Information Processing Systems (NeurIPS), New Orleans, Louisiana, USA, 2023*. \[[codes](https://github.com/AAAAAAsuka/Impress/tree/main)\]
+- [IMPRESS: Evaluating the Resilience of Imperceptible Perturbations Against Unauthorized Data Usage in Diffusion-Based Generative AI](https://arxiv.org/abs/2310.19248), **Bochuan Cao**,  Changjiang Li, Ting Wang, Jinyuan Jia, Bo Li, Jinghui Chen. In Proceedings of the *37th Conference on Neural Information Processing Systems (NeurIPS), New Orleans, Louisiana, USA, 2023*. \[[codes](https://github.com/AAAAAAsuka/Impress/tree/main)\]
 - [Defending Against Alignment-Breaking Attacks via Robustly Aligned LLM](https://arxiv.org/abs/2309.14348), **Bochuan Cao**, Yuanpu Cao, Lu Lin, Jinghui Chen. *arXiv 2309.14348*. \[[codes](https://github.com/AAAAAAsuka/llm_defends)\]
 - [On the Safety of Open-Sourced Large Language Models: Does Alignment Really Prevent Them From Being Misused?](https://arxiv.org/abs/2310.01581), Hangfan Zhang, Zhimeng Guo, Huaisheng Zhu, **Bochuan Cao**, Lu Lin, Jinyuan Jia, Jinghui Chen, Dinghao Wu. *arXiv 2310.01581*.
 - [Wild-Time: A Benchmark of in-the-Wild Distribution Shift over Time](https://arxiv.org/abs/2211.14238), Huaxiu Yao, Caroline Choi, **Bochuan Cao**, Yoonho Lee, Pang Wei Koh, Chelsea Finn. In Proceedings of the *36th Advances in Neural Information Processing Systems (NeurIPS), New Orleans, Louisiana, USA, 2022*.\[[codes](https://github.com/huaxiuyao/Wild-Time)\]
@@ -55,12 +55,20 @@ I am currently a second-year Ph.D. student at Pennsylvania State University, adv
 - *2022.06* Outstanding Undergraduate Graduates in University of Electronic Science and Technology of China.
 
 # 📖 Educations
-- *2022.06 - now*, Pennsylvania State University (PSU), College of Information Sciences and Technology, Doctor of Philosophy. 
+- *2022.08 - now*, Pennsylvania State University (PSU), College of Information Sciences and Technology, Doctor of Philosophy. 
 - *2018.09 - 2022.06*, University of Electronic Science and Technology of China (UESTC), School of Automation Engineering, Bachelor of Engineering
 
-<!-- # 💬 Invited Talks
-- *2021.06*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
-- *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/) -->
+# 💬 Acadamic Service
+### Program Committee/Reviewer
+
+- International Conference on Machine Learning (ICML)
+- International Conference on Learning Representations (ICLR)
+- IEEE International Conference on Big Data (BigData)
+- Transactions on Knowledge and Data Engineering (TKDE)
+- Transactions on Information Systems (TOIS)
+
+### Teaching
+ - SRA 365: Statistical Analysis for Information Sciences, Teaching Assistant, 2023 Fall and 2024 Spring, Penn State.
 
 # 💻 Internships
 - *2021.05 - 2022.05*, Research Intern at Search Strategy Department, Baidu Inc, Beijing, China. Advisor: Dr.Yiding Liu.
