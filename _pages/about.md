@@ -43,6 +43,10 @@ I am currently a second-year Ph.D. student at Pennsylvania State University, adv
 </div>
 </div> -->
 
+- [XPrompt: Explaining Large Language Model's Generation via Joint Prompt Attribution](https://arxiv.org/abs/2405.20404), Yurui Chang, **Bochuan Cao**, Yujia Wang, Jinghui Chen, Lu Lin. *arxiv preprint*.
+- [On the Intrinsic Self-Correction Capability of LLMs: Uncertainty and Latent Concept](https://arxiv.org/abs/2406.02378), Guangliang Liu, Haitao Mao, **Bochuan Cao**, Zhiyu Xue, Kristen Johnson, Jiliang Tang, Rongrong Wang. *arxiv preprint*.
+- [Personalized Steering of Large Language Models: Versatile Steering Vectors Through Bi-directional Preference Optimization](https://arxiv.org/abs/2406.00045), Yuanpu Cao, Tianrong Zhang, **Bochuan Cao**, Ziyi Yin, Lu Lin, Fenglong Ma, Jinghui Chen. *arxiv preprint*.
+- [WordGame: Efficient & Effective LLM Jailbreak via Simultaneous Obfuscation in Query and Response](https://arxiv.org/abs/2405.14023), Tianrong Zhang, **Bochuan Cao**, Yuanpu Cao, Lu Lin, Prasenjit Mitra, Jinghui Chen. *arxiv preprint*.
 - [Defending Against Alignment-Breaking Attacks via Robustly Aligned LLM](https://arxiv.org/abs/2309.14348), **Bochuan Cao**, Yuanpu Cao, Lu Lin, Jinghui Chen. In Proceedings of the *The 62nd Annual Meeting of the Association for Computational Linguistics (ACL 2024 main conference), Bangkok, Thailand*. \[[codes](https://github.com/AAAAAAsuka/llm_defends)\]
 - [On the Safety of Open-Sourced Large Language Models: Does Alignment Really Prevent Them From Being Misused?](https://arxiv.org/abs/2310.01581), Hangfan Zhang, Zhimeng Guo, Huaisheng Zhu, **Bochuan Cao**, Lu Lin, Jinyuan Jia, Jinghui Chen, Dinghao Wu. In Proceedings of the *The 62nd Annual Meeting of the Association for Computational Linguistics (ACL 2024 main conference), Bangkok, Thailand*.
 - Is Your Jailbreaking Prompt Truly Effective for Large Language Models?, **Bochuan Cao**, Tianrong Zhang, Yuanpu Cao, Jinyuan Jia, Lu Lin, Jinghui Chen. In Proceedings of the *SECURE AND TRUSTWORTHY LARGE LANGUAGE MODELS (SET LLM @ ICLR 2024)*. 
