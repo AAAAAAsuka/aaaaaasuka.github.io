@@ -66,7 +66,7 @@ I am currently a second-year Ph.D. student at Pennsylvania State University, adv
 
 # 💬 Acadamic Service
 ### Program Committee/Reviewer
-
+- Neural Information Processing Systems (NeurIPS)
 - International Conference on Machine Learning (ICML)
 - International Conference on Learning Representations (ICLR)
 - IEEE International Conference on Big Data (BigData)
