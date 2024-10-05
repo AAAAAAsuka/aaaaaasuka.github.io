@@ -7,7 +7,7 @@
 
 # Site Settings
 title                    : "Bochuan’s homepage"
-description              : "Second-year Ph.D. Student"
+description              : "曹伯川"
 repository               : "AAAAAAsuka/aaaaaasuka.github.io"
 google_scholar_stats_use_cdn : false
 
@@ -43,7 +43,7 @@ author:
   instagram        :
   impactstory      : # e.g., "https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         : https://www.linkedin.com/in/bochuan-cao-b291862bb/
+  linkedin         : bochuan-cao-b291862bb
   dblp             : # e.g., "https://dblp.org/pid/xx/xxxx.html"
   orcid            : # e.g., "https://orcid.org/xxxx"
   pinterest        :

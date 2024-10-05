@@ -18,9 +18,9 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 # About Me
 
-I am currently a second-year Ph.D. student at Pennsylvania State University, advised by [Dr.Jinghui Chen](https://jinghuichen.github.io/). I earned my Bachelor's degree from the University of Electronic Science and Technology of China(UESTC) in 2022. My research interests include trustworthiness and security issues in large language models, safety and privacy issues in image generation models, and interpretation and evaluation of large pre-trained models. I warmly welcome anyone to discuss research works with me!
+I am currently a Ph.D. candidate at Pennsylvania State University, advised by [Dr.Jinghui Chen](https://jinghuichen.github.io/). I earned my Bachelor's degree from the University of Electronic Science and Technology of China (UESTC) in 2022. My research interests include trustworthiness and security issues in large language models, safety and privacy issues in image generation models, and interpretation and evaluation of large pre-trained models. I warmly welcome anyone to discuss research works with me!
 
-<!-- <em style="color: red;">I am currently seeking a research intern position for the summer of 2024. If you are hiring and interested in my background, please feel free to reach out and contact me!</em> -->
+<em style="color: red;">I am currently seeking a research intern position for the summer of 2025. If you are hiring and interested in my background, please feel free to reach out and contact me!</em>
 
 <!-- My research interest includes neural machine translation and computer vision. I have published more than 100 papers at the top international AI conferences with total <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'>google scholar citations <strong><span id='total_cit'>260000+</span></strong></a> (You can also use google scholar badge <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>). -->
 
@@ -43,11 +43,14 @@ I am currently a second-year Ph.D. student at Pennsylvania State University, adv
 </div>
 </div> -->
 
+
+- DFBA: Entirely Data Free Backdoor Attacks, **Bochuan Cao**, Jinyuan Jia, Chuxuan Hu, Wenbo Guo, Zhen Xiang, Jinghui Chen, Bo Li, Dawn Song. In Proceedings of the *37th Conference on Neural Information Processing Systems (NeurIPS), Vancouver, 2024.*
+- [Personalized Steering of Large Language Models: Versatile Steering Vectors Through Bi-directional Preference Optimization](https://arxiv.org/abs/2406.00045), Yuanpu Cao, Tianrong Zhang, **Bochuan Cao**, Ziyi Yin, Lu Lin, Fenglong Ma, Jinghui Chen. In Proceedings of the *37th Conference on Neural Information Processing Systems (NeurIPS), Vancouver, 2024.*
 - [XPrompt: Explaining Large Language Model's Generation via Joint Prompt Attribution](https://arxiv.org/abs/2405.20404), Yurui Chang, **Bochuan Cao**, Yujia Wang, Jinghui Chen, Lu Lin. *arxiv preprint*.
 - [On the Intrinsic Self-Correction Capability of LLMs: Uncertainty and Latent Concept](https://arxiv.org/abs/2406.02378), Guangliang Liu, Haitao Mao, **Bochuan Cao**, Zhiyu Xue, Kristen Johnson, Jiliang Tang, Rongrong Wang. *arxiv preprint*.
-- [Personalized Steering of Large Language Models: Versatile Steering Vectors Through Bi-directional Preference Optimization](https://arxiv.org/abs/2406.00045), Yuanpu Cao, Tianrong Zhang, **Bochuan Cao**, Ziyi Yin, Lu Lin, Fenglong Ma, Jinghui Chen. *arxiv preprint*.
 - [WordGame: Efficient & Effective LLM Jailbreak via Simultaneous Obfuscation in Query and Response](https://arxiv.org/abs/2405.14023), Tianrong Zhang, **Bochuan Cao**, Yuanpu Cao, Lu Lin, Prasenjit Mitra, Jinghui Chen. *arxiv preprint*.
 - [Defending Against Alignment-Breaking Attacks via Robustly Aligned LLM](https://arxiv.org/abs/2309.14348), **Bochuan Cao**, Yuanpu Cao, Lu Lin, Jinghui Chen. In Proceedings of the *The 62nd Annual Meeting of the Association for Computational Linguistics (ACL 2024 main conference), Bangkok, Thailand*. \[[codes](https://github.com/AAAAAAsuka/llm_defends)\]
+- [Watch the Watcher! Backdoor Attacks on Security-Enhancing Diffusion Models](https://arxiv.org/abs/2406.09669), Changjiang Li, Ren Pang, *Bochuan Cao*, Jinghui Chen, Fenglong Ma, Shouling Ji, Ting Wang. *arxiv preprint*.
 - [On the Safety of Open-Sourced Large Language Models: Does Alignment Really Prevent Them From Being Misused?](https://arxiv.org/abs/2310.01581), Hangfan Zhang, Zhimeng Guo, Huaisheng Zhu, **Bochuan Cao**, Lu Lin, Jinyuan Jia, Jinghui Chen, Dinghao Wu. In Proceedings of the *The 62nd Annual Meeting of the Association for Computational Linguistics (ACL 2024 main conference), Bangkok, Thailand*.
 - Is Your Jailbreaking Prompt Truly Effective for Large Language Models?, **Bochuan Cao**, Tianrong Zhang, Yuanpu Cao, Jinyuan Jia, Lu Lin, Jinghui Chen. In Proceedings of the *SECURE AND TRUSTWORTHY LARGE LANGUAGE MODELS (SET LLM @ ICLR 2024)*. 
 - [Stealthy and Persistent Unalignment on Large Language Models via Backdoor Injections](https://arxiv.org/abs/2312.00027), Yuanpu Cao, **Bochuan Cao**, Jinghui Chen. In Proceedings of the *2024 Annual Conference of the North American Chapter of the Association for Computational Linguistics (NAACL), Mexico City, Mexico, 2024.* \[[codes](https://github.com/CaoYuanpu/BackdoorUnalign)\]
@@ -61,7 +64,7 @@ I am currently a second-year Ph.D. student at Pennsylvania State University, adv
 - *2022.06* Outstanding Undergraduate Graduates in University of Electronic Science and Technology of China.
 
 # 📖 Educations
-- *2022.08 - now*, Pennsylvania State University (PSU), College of Information Sciences and Technology, Doctor of Philosophy. 
+- *2022.08 - now*, Pennsylvania State University (Penn State), College of Information Sciences and Technology, Doctor of Philosophy. 
 - *2018.09 - 2022.06*, University of Electronic Science and Technology of China (UESTC), School of Automation Engineering, Bachelor of Engineering
 
 # 💬 Acadamic Service
@@ -69,6 +72,8 @@ I am currently a second-year Ph.D. student at Pennsylvania State University, adv
 - Neural Information Processing Systems (NeurIPS)
 - International Conference on Machine Learning (ICML)
 - International Conference on Learning Representations (ICLR)
+- International Conference on Artificial Intelligence and Statistics (AISTATS)
+- Association for the Advancement of Artificial Intelligence (AAAI)
 - IEEE International Conference on Big Data (BigData)
 - Transactions on Knowledge and Data Engineering (TKDE)
 - Transactions on Information Systems (TOIS)
@@ -78,4 +83,4 @@ I am currently a second-year Ph.D. student at Pennsylvania State University, adv
 
 # 💻 Internships
 - *2024.05 - 2024.08*, Research Intern at CR/RSI2-NA Department, Robert Bosch LLC, Sunnyvale, USA. Advisor: Dr.Sashidhar Jakkamsetti.
-- *2021.05 - 2022.05*, Research Intern at Search Strategy Department, Baidu Inc, Beijing, China. Advisor: Dr.Yiding Liu.
+- *2021.03 - 2022.03*, Research Intern at Search Strategy Department, Baidu Inc, Beijing, China. Advisor: Dr.Yiding Liu.
