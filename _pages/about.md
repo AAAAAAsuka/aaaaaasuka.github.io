@@ -61,7 +61,6 @@ I am currently a Ph.D. candidate at Pennsylvania State University, advised by [D
 
 # 🎖 Honors and Awards
 - *2023.10* NeurIPS Scholar Award.
-- *2022.06* Outstanding Undergraduate Graduates in University of Electronic Science and Technology of China.
 
 # 📖 Educations
 - *2022.08 - now*, Pennsylvania State University (Penn State), College of Information Sciences and Technology, Doctor of Philosophy. 
