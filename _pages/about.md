@@ -60,7 +60,8 @@ I am currently a Ph.D. candidate at Pennsylvania State University, advised by [D
 - [OmniLytics: A Blockchain-based Secure Data Market for Decentralized Machine Learning](https://arxiv.org/abs/2107.05252), Jiacheng Liang, Songze Li, **Bochuan Cao**, Wensi Jiang, Chaoyang He. In Proceedings of the *International Workshop on Federated Learning for User Privacy and Data Confidentiality in Conjunction with ICML 2021*.
 
 # 🎖 Honors and Awards
-- *2023.10* NeurIPS Scholar Award.
+- *2024.11* NeurIPS 2024 Top Reviewers (top 8%).
+- *2023.10* NeurIPS 2023 Scholar Award.
 
 # 📖 Educations
 - *2022.08 - now*, Pennsylvania State University (Penn State), College of Information Sciences and Technology, Doctor of Philosophy. 
