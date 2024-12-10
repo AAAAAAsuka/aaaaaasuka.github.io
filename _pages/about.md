@@ -44,7 +44,7 @@ I am currently a Ph.D. candidate at Pennsylvania State University, advised by [D
 </div> -->
 
 
-- Data Free Backdoor Attacks, **Bochuan Cao**, Jinyuan Jia, Chuxuan Hu, Wenbo Guo, Zhen Xiang, Jinghui Chen, Bo Li, Dawn Song. In Proceedings of the *37th Conference on Neural Information Processing Systems (NeurIPS), Vancouver, 2024.*
+- [Data Free Backdoor Attacks](https://arxiv.org/abs/2412.06219), **Bochuan Cao**, Jinyuan Jia, Chuxuan Hu, Wenbo Guo, Zhen Xiang, Jinghui Chen, Bo Li, Dawn Song. In Proceedings of the *37th Conference on Neural Information Processing Systems (NeurIPS), Vancouver, 2024.*
 - [Personalized Steering of Large Language Models: Versatile Steering Vectors Through Bi-directional Preference Optimization](https://arxiv.org/abs/2406.00045), Yuanpu Cao, Tianrong Zhang, **Bochuan Cao**, Ziyi Yin, Lu Lin, Fenglong Ma, Jinghui Chen. In Proceedings of the *37th Conference on Neural Information Processing Systems (NeurIPS), Vancouver, 2024.*
 - [XPrompt: Explaining Large Language Model's Generation via Joint Prompt Attribution](https://arxiv.org/abs/2405.20404), Yurui Chang, **Bochuan Cao**, Yujia Wang, Jinghui Chen, Lu Lin. *arxiv preprint*.
 - [On the Intrinsic Self-Correction Capability of LLMs: Uncertainty and Latent Concept](https://arxiv.org/abs/2406.02378), Guangliang Liu, Haitao Mao, **Bochuan Cao**, Zhiyu Xue, Kristen Johnson, Jiliang Tang, Rongrong Wang. *arxiv preprint*.
