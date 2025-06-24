@@ -60,7 +60,7 @@ I am currently a Ph.D. candidate at Pennsylvania State University, advised by [D
 - [OmniLytics: A Blockchain-based Secure Data Market for Decentralized Machine Learning](https://arxiv.org/abs/2107.05252), Jiacheng Liang, Songze Li, **Bochuan Cao**, Wensi Jiang, Chaoyang He. In Proceedings of the *International Workshop on Federated Learning for User Privacy and Data Confidentiality in Conjunction with ICML 2021*.
 
 # 🎖 Honors and Awards
-- *2024.11* [NeurIPS 2024 Top Reviewers](https://neurips.cc/Conferences/2024/ProgramCommittee#top-reviewers) (top 8%).
+- *2024.11* [NeurIPS 2024 Top Reviewers](https://neurips.cc/Conferences/2024/ProgramCommittee#top-reviewers).
 - *2023.10* NeurIPS 2023 Scholar Award.
 
 # 📖 Educations
@@ -82,5 +82,6 @@ I am currently a Ph.D. candidate at Pennsylvania State University, advised by [D
  - SRA 365: Statistical Analysis for Information Sciences, Teaching Assistant, 2023 Fall and 2024 Spring, Penn State.
 
 # 💻 Internships
+- *2025.05 - 2025.08*, Research Intern at Security-Flow, ByteDance, San Jose, USA. Advisor: Dr.Yang Bai and Dr.Xinyu Xing.
 - *2024.05 - 2024.08*, Research Intern at CR/RSI2-NA Department, Robert Bosch LLC, Sunnyvale, USA. Advisor: Dr.Sashidhar Jakkamsetti.
 - *2021.03 - 2022.03*, Research Intern at Search Strategy Department, Baidu Inc, Beijing, China. Advisor: Dr.Yiding Liu.
