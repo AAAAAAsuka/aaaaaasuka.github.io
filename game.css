@@ -66,12 +66,14 @@
 /* Mobile-friendly layout adjustments */
 @media (max-width: 1024px) {
   #game-container {
-    position: relative;
     min-height: 100vh;
+    overflow-y: auto;
   }
   #main-panels {
+    flex-direction: column;
     gap: 0.75rem;
     padding-bottom: 0.75rem;
+    overflow: visible;
   }
 }
 
@@ -81,12 +83,19 @@
   }
   #main-panels > div {
     min-height: auto;
+    width: 100% !important;
   }
   #manual-research-button {
-    width: min(100%, 20rem);
+    width: min(100%, 18rem);
     height: auto;
     aspect-ratio: 1 / 1;
   }
+}
+
+/* Middle panel scrollable on all viewports to preserve column layout */
+#middle-panel {
+  overflow-y: auto;
+  max-height: none;
 }
 
 /* When overlay is open, hide site masthead and lock scroll */

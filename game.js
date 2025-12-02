@@ -33,6 +33,8 @@ let newsIndex = 0, isGameStarted = false, lastTickTime = Date.now();
 let acceptedPapers = {};
 let submissionSession = null;
 let resultTypingTimer = null;
+let lastSaveTime = Date.now();
+const OFFLINE_LIMIT_SECONDS = 12 * 3600;
 
 const dom = { elements: { buildings: {}, upgrades: {} } };
 
@@ -79,6 +81,9 @@ function updateStaticTexts(){
   dom.autosaveLabel && (dom.autosaveLabel.textContent = t('autosaving','Auto-saving'));
   dom.langToggle && (dom.langToggle.textContent = currentLang==='zh' ? 'English' : '中文');
   dom.newsPrefix && (dom.newsPrefix.textContent = t('newsPrefix','NEWS:'));
+  const collapseLabel = t('collapse','Collapse');
+  dom.upgradesToggle && (dom.upgradesToggle.textContent = collapseLabel);
+  dom.buildingsToggle && (dom.buildingsToggle.textContent = collapseLabel);
   dom.step1Label && (dom.step1Label.textContent = 'Step 1');
   dom.step2Label && (dom.step2Label.textContent = 'Step 2');
   dom.step1Desc && (dom.step1Desc.textContent = t('submissionStep1', dom.step1Desc.textContent || ''));
@@ -439,6 +444,19 @@ function calculateRPS(){
 }
 function updateAll(){ updateMultipliers(); calculateRPS(); updateUI(); }
 
+function applyOfflineEarnings(savedTime){
+  if(!savedTime) return;
+  updateMultipliers();
+  calculateRPS();
+  const deltaSec = Math.min(Math.max((Date.now() - savedTime)/1000, 0), OFFLINE_LIMIT_SECONDS);
+  if(deltaSec <= 0) return;
+  const gainedRp = rps * deltaSec;
+  const gainedCitations = citationsRate * deltaSec;
+  rp += gainedRp;
+  totalRp += gainedRp;
+  citations += gainedCitations;
+}
+
 // ---------------- Handlers ----------------
 function buyBuildingHandler(e){ const btn=e.target.closest('button[data-type="building"]'); if(btn) buyBuilding(btn.dataset.id); }
 function buyUpgradeHandler(e){ const btn=e.target.closest('button[data-type="upgrade"]'); if(btn) buyUpgrade(btn.dataset.id); }
@@ -452,17 +470,19 @@ function handleLanguageToggle(){ applyLanguage(currentLang==='zh'?'en':'zh'); }
 function applyLanguage(lang){ currentLang = (lang==='en')?'en':'zh'; localStorage.setItem('phd-clicker-lang',currentLang); setLocaleData(currentLang); syncLocaleAssets(); updateStaticTexts(); renderInitialDOM(); updateAll(); }
 
 // ---------------- Save/Load ----------------
-function saveGame(){ const data={rp,totalRp,citations,citationsRate,papersSubmitted,inventory,purchasedUpgrades,acceptedPapers,currentLang}; localStorage.setItem('phd-clicker-save', JSON.stringify(data)); }
+function saveGame(){ lastSaveTime = Date.now(); const data={rp,totalRp,citations,citationsRate,papersSubmitted,inventory,purchasedUpgrades,acceptedPapers,currentLang,lastSaveTime}; localStorage.setItem('phd-clicker-save', JSON.stringify(data)); }
 function loadGame(){
   const saved=localStorage.getItem('phd-clicker-save');
-  if(!saved){ inventory={}; BUILDINGS_CONFIG.forEach(b=>inventory[b.id]=0); return;}
+  if(!saved){ inventory={}; BUILDINGS_CONFIG.forEach(b=>inventory[b.id]=0); return lastSaveTime; }
   try{
     const d=JSON.parse(saved);
     rp=d.rp||0; totalRp=d.totalRp||0; citations=d.citations||0; papersSubmitted=d.papersSubmitted||0;
     citationsRate=totalCitationRateForPapers(papersSubmitted);
     inventory=d.inventory||{}; purchasedUpgrades=d.purchasedUpgrades||[]; acceptedPapers=d.acceptedPapers||{};
     if(d.currentLang){ currentLang=d.currentLang; setLocaleData(currentLang); }
+    lastSaveTime = d.lastSaveTime || Date.now();
   }catch(e){ console.error('load failed',e); }
+  return lastSaveTime;
 }
 
 // ---------------- News ----------------
@@ -514,7 +534,25 @@ function attachEventListeners(){
   if (dom.questionNextBtn) dom.questionNextBtn.addEventListener('click', goNextQuestion);
 }
 
-function startGame(){ if(isGameStarted) return; isGameStarted=true; assignDom(); syncLocaleAssets(); updateStaticTexts(); renderInitialDOM(); attachEventListeners(); loadGame(); updateAll(); updateNewsTicker(); setInterval(gameLoop,100); setInterval(saveGame,5000); dom.newsTicker && setInterval(updateNewsTicker,6500); }
+function startGame(){
+  if(isGameStarted) return;
+  isGameStarted=true;
+  assignDom();
+  syncLocaleAssets();
+  updateStaticTexts();
+  renderInitialDOM();
+  attachEventListeners();
+  const savedTime = loadGame();
+  updateMultipliers();
+  calculateRPS();
+  applyOfflineEarnings(savedTime);
+  lastTickTime = Date.now();
+  updateAll();
+  updateNewsTicker();
+  setInterval(gameLoop,100);
+  setInterval(saveGame,5000);
+  dom.newsTicker && setInterval(updateNewsTicker,6500);
+}
 
 document.addEventListener('DOMContentLoaded', ()=>{ if(document.getElementById('phd-clicker-app')) startGame(); });
 
