@@ -1,0 +1,383 @@
+﻿// =================================================================================
+// I. GAME STATE & APP/UI STATE
+// =================================================================================
+
+// Core Game State & App State
+let researchPoints = 0, citations = 0, hIndex = 0;
+let rpPerSecond = 0, citationsPerSecond = 0;
+let activeLegacy = null, globalProductionModifier = 1.0;
+let isGameStarted = false, isFullscreen = false;
+let gameYear = 1, totalGameTimeElapsed = 0;
+let isGameOver = false, lastSaveTime = Date.now();
+let activeEvents = [], timeUntilNextEvent = 30;
+
+// --- CONFIGURATION ---
+const SAVE_KEY = 'phdClickerSave';
+const EVENT_CHANCE = 0.5;
+const MAX_GAME_YEARS = 5, REAL_SECONDS_PER_GAME_YEAR = 60 * 10;
+const TOTAL_GAME_DURATION_SECONDS = MAX_GAME_YEARS * REAL_SECONDS_PER_GAME_YEAR;
+const initialBuildingsState = [
+    { id: "auto_clicker", name: "自动点击器", description: "终于可以把手从鼠标上拿开了。", baseCost: 50, cost: 50, baseRpPerSecond: 1, owned: 0, unlocked: false, requiredHIndex: 1 },
+    { id: "arxiv", name: "arXiv 爬虫", description: "自动下载最新论文，假装你读过了。", baseCost: 15, cost: 15, baseRpPerSecond: 0.1, owned: 0, unlocked: true },
+    { id: "intern", name: "实习生 (Intern)", description: "主要负责洗数据。虽然经常搞崩环境。", baseCost: 100, cost: 100, baseRpPerSecond: 1, owned: 0, unlocked: true },
+    { id: "gpu", name: "GPU 租赁", description: "Colab Pro+。断连是家常便饭。", baseCost: 1100, cost: 1100, baseRpPerSecond: 8, owned: 0, unlocked: true, type: 'gpu' },
+    { id: "h100", name: "H100 集群", description: "显存大到不知道怎么用满。", baseCost: 12000, cost: 12000, baseRpPerSecond: 45, owned: 0, unlocked: false, requiredHIndex: 10, type: 'gpu' },
+    { id: "llm", name: "预训练大模型", description: "在那庞大的参数海中，或许有灵魂。", baseCost: 250000, cost: 250000, baseRpPerSecond: 300, owned: 0, unlocked: false, requiredHIndex: 25 },
+    { id: "idea", name: "开创性 Idea", description: "你可能要因此失眠好几晚。", baseCost: 1000000, cost: 1000000, baseRpPerSecond: 1500, owned: 0, unlocked: false, requiredHIndex: 50 },
+];
+let buildings = JSON.parse(JSON.stringify(initialBuildingsState));
+const legacies = [
+    { id: "nepo_baby", title: "学阀继承人", description: "开局自带 1000 引用数。", effect: () => { citations = 1000; } },
+    { id: "industry_lab", title: "富得流油实验室", description: "所有 GPU 类建筑价格 -50%。", effect: () => { buildings.forEach(b => { if(b.type === 'gpu') b.baseCost *= 0.5; }); } },
+    { id: "whiz_kid", title: "天才少年", description: "手动点击效率 x10。", effect: () => { manualResearchButton.dataset.clickValue = 10; } },
+    { id: "theorist", title: "理论派传人", description: "RP随时间自动指数增长，但前期极慢。", effect: () => { /* Handled in game loop */ } },
+];
+const hIndexMilestones = [
+    { hIndex: 5, name: "熟练工", description: "解锁“批量投稿”功能。", unlocked: false, effect: () => { document.getElementById('submit-paper-10x-button').classList.remove('d-none'); } },
+    { hIndex: 10, name: "Rising Star", description: "全局产出 +20%。", unlocked: false, effect: () => { globalProductionModifier = 1.2; } },
+    { hIndex: 50, name: "SOTA Chaser", description: "全局产出额外 +30%。", unlocked: false, effect: () => { globalProductionModifier = 1.5; } },
+];
+const randomEvents = [
+    { name: "灵感迸发", description: "Yann LeCun 转推了你的论文！", type: 'buff', duration: 30, effect: (apply) => { if(apply) citationsPerSecond *= 5; else citationsPerSecond /= 5; } },
+    { name: "同行压力", description: "Reviewer #2 觉得你的图画得丑。", type: 'debuff', duration: 120, effect: (apply) => { const btn = document.getElementById('submit-paper-button'); if(btn) btn.disabled = apply; } },
+    { name: "意外之喜", description: "发现了一个未被占用的 GPU 节点！", type: 'instant', effect: () => { const bonus = researchPoints * 0.25 + 100; researchPoints += bonus; } },
+    { name: "服务器维护", description: "服务器停电维护，自动产出暂停。", type: 'debuff', duration: 10, effect: (apply) => { if(apply) globalProductionModifier /= 1000; else globalProductionModifier *= 1000; } },
+];
+
+// =================================================================================
+// II. DOM ELEMENT REFERENCES
+// =================================================================================
+const floatingWidget = document.getElementById('floating-widget');
+const widgetText = document.getElementById('widget-text');
+const widgetRpDisplay = document.getElementById('widget-rp-display');
+const minimizeButton = document.getElementById('minimize-button');
+const gameContainer = document.getElementById('game-container');
+const rpDisplay = document.getElementById('rp-display');
+const citationsDisplay = document.getElementById('citations-display');
+const hIndexDisplay = document.getElementById('h-index-display');
+const rpPerSecondDisplay = document.getElementById('rp-per-second-display');
+const citationsPerSecondDisplay = document.getElementById('citations-per-second-display');
+const manualResearchButton = document.getElementById('manual-research-button');
+const buildingsListDiv = document.getElementById('buildings-list');
+const eventNotificationArea = document.getElementById('event-notification-area');
+const gameOverScreen = document.getElementById('game-over-screen');
+const legacySelectionScreen = document.getElementById('legacy-selection-screen');
+const startTransmigrationButton = document.getElementById('start-transmigration-button');
+
+// =================================================================================
+// III. UI & VIEW MANAGEMENT
+// =================================================================================
+
+function toggleView(showFullscreen) {
+    isFullscreen = showFullscreen;
+    gameContainer.classList.toggle('hidden', !showFullscreen);
+    floatingWidget.classList.toggle('hidden', showFullscreen);
+}
+
+function updateDisplay() {
+    rpDisplay.textContent = researchPoints.toFixed(1);
+    citationsDisplay.textContent = citations.toFixed(1);
+    hIndexDisplay.textContent = hIndex;
+    document.getElementById('year-display').textContent = gameYear;
+    rpPerSecondDisplay.textContent = (rpPerSecond * globalProductionModifier).toFixed(1);
+    citationsPerSecondDisplay.textContent = citationsPerSecond.toFixed(1);
+    widgetRpDisplay.textContent = `RP: ${researchPoints.toFixed(0)}`;
+    document.getElementById('time-progress-bar').value = (totalGameTimeElapsed / TOTAL_GAME_DURATION_SECONDS) * 100;
+}
+
+function renderBuildings() {
+    buildingsListDiv.innerHTML = '';
+    buildings.filter(b => b.unlocked).forEach(building => {
+        const buildingDiv = document.createElement('div');
+        buildingDiv.className = 'building';
+        buildingDiv.innerHTML = `<h4>${building.name} (拥有: ${building.owned})</h4><p>${building.description}</p><p>产出: ${building.baseRpPerSecond.toFixed(1)} RP/秒</p><p>成本: ${building.cost.toFixed(0)} RP</p><button onclick="buyBuilding('${building.id}')">购买</button>`;
+        buildingsListDiv.appendChild(buildingDiv);
+    });
+}
+
+function showEventToast(event) {
+    const toast = document.createElement('div');
+    toast.className = 'event-toast';
+    toast.classList.add(event.type);
+    toast.textContent = event.description;
+    eventNotificationArea.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toast.addEventListener('transitionend', () => toast.remove());
+    }, 5000);
+}
+
+// =================================================================================
+// IV. CORE GAME LOGIC
+// =================================================================================
+
+function gameLoop() {
+    if (isGameOver) return;
+    totalGameTimeElapsed++;
+    gameYear = Math.min(MAX_GAME_YEARS, Math.floor(totalGameTimeElapsed / REAL_SECONDS_PER_GAME_YEAR) + 1);
+    timeUntilNextEvent--;
+    if (timeUntilNextEvent <= 0) {
+        triggerRandomEvent();
+        timeUntilNextEvent = 30 + Math.random() * 30;
+    }
+    processActiveEvents();
+    if (activeLegacy === 'theorist') researchPoints += Math.pow(1.001, totalGameTimeElapsed) - 1;
+    researchPoints += rpPerSecond * globalProductionModifier;
+    citations += citationsPerSecond;
+    updateHIndexAndMilestones();
+    updateDisplay();
+    if (totalGameTimeElapsed >= TOTAL_GAME_DURATION_SECONDS) endGame();
+}
+
+function submitPaper(multiplier = 1) {
+    const cost = 100 * multiplier;
+    if (researchPoints >= cost) {
+        researchPoints -= cost;
+        citationsPerSecond += 0.1 * multiplier;
+        alert(`成功发表 ${multiplier} 篇论文！引用率显著提升。`);
+        updateDisplay();
+    } else {
+        alert("RP不足，无法发表论文！");
+    }
+}
+
+function buyBuilding(buildingId) {
+    const building = buildings.find(b => b.id === buildingId);
+    if (researchPoints >= building.cost) {
+        researchPoints -= building.cost;
+        building.owned++;
+        building.cost = Math.ceil(building.baseCost * Math.pow(1.15, building.owned));
+        recalculateRpPerSecond();
+        renderBuildings();
+        updateDisplay();
+    } else {
+        alert("研究点数不足！");
+    }
+}
+
+function updateHIndexAndMilestones() {
+    const newHIndex = Math.floor(Math.sqrt(citations / 5));
+    if (newHIndex > hIndex) {
+        hIndex = newHIndex;
+        buildings.forEach(b => {
+            if (!b.unlocked && b.requiredHIndex && hIndex >= b.requiredHIndex) {
+                b.unlocked = true;
+                alert(`建筑解锁！\n\nH-Index 达到 ${hIndex}，现在可以购买 "${b.name}"。`);
+                renderBuildings();
+            }
+        });
+        hIndexMilestones.forEach(m => {
+            if (!m.unlocked && hIndex >= m.hIndex) {
+                m.unlocked = true;
+                m.effect();
+                alert(`里程碑解锁: ${m.name}！\n\n${m.description}`);
+            }
+        });
+    }
+}
+
+function recalculateRpPerSecond() {
+    rpPerSecond = 0;
+    buildings.forEach(b => {
+        if (b.owned > 0) rpPerSecond += b.owned * b.baseRpPerSecond;
+    });
+}
+
+function processActiveEvents() {
+    for (let i = activeEvents.length - 1; i >= 0; i--) {
+        const event = activeEvents[i];
+        event.duration--;
+        if (event.duration <= 0) {
+            event.effect(false);
+            activeEvents.splice(i, 1);
+        }
+    }
+}
+
+function triggerRandomEvent() {
+    if (Math.random() > EVENT_CHANCE) return;
+    const event = randomEvents[Math.floor(Math.random() * randomEvents.length)];
+    showEventToast(event);
+    if (event.type === 'instant') {
+        event.effect();
+    } else {
+        if (activeEvents.some(ae => ae.name === event.name)) return;
+        event.effect(true);
+        activeEvents.push({ ...event });
+    }
+}
+
+function endGame() {
+    isGameOver = true;
+    clearInterval(gameLoopInterval);
+    clearInterval(saveGameInterval);
+    document.getElementById('final-citations').textContent = citations.toFixed(1);
+    document.getElementById('final-h-index').textContent = hIndex;
+    gameOverScreen.classList.remove('d-none');
+    localStorage.removeItem(SAVE_KEY);
+}
+
+function resetGame(legacyId) {
+    researchPoints = 0;
+    citations = 0;
+    hIndex = 0;
+    rpPerSecond = 0;
+    citationsPerSecond = 0;
+    totalGameTimeElapsed = 0;
+    gameYear = 1;
+    isGameOver = false;
+    activeLegacy = legacyId;
+    globalProductionModifier = 1.0;
+    manualResearchButton.dataset.clickValue = 1;
+    timeUntilNextEvent = 30;
+    activeEvents.forEach(e => e.effect(false));
+    activeEvents = [];
+    buildings = JSON.parse(JSON.stringify(initialBuildingsState));
+    hIndexMilestones.forEach(m => m.unlocked = false);
+    document.getElementById('submit-paper-10x-button').classList.add('d-none');
+    if (legacyId) {
+        const legacy = legacies.find(l => l.id === legacyId);
+        if (legacy) legacy.effect();
+    }
+    buildings.forEach(b => {
+        if (b.owned === 0) b.cost = b.baseCost;
+    });
+}
+
+function saveGame() {
+    if (isGameOver) return;
+    const saveData = {
+        researchPoints, citations, hIndex, totalGameTimeElapsed, citationsPerSecond, activeLegacy, globalProductionModifier, timeUntilNextEvent,
+        lastSaveTime: Date.now(),
+        buildings: buildings.map(b => ({ id: b.id, owned: b.owned, cost: b.cost, unlocked: b.unlocked })),
+        milestones: hIndexMilestones.map(m => ({ hIndex: m.hIndex, unlocked: m.unlocked })),
+        activeEvents: activeEvents.map(e => ({ name: e.name, duration: e.duration })),
+    };
+    localStorage.setItem(SAVE_KEY, JSON.stringify(saveData));
+}
+
+function loadGame() {
+    const savedData = localStorage.getItem(SAVE_KEY);
+    if (!savedData) {
+        resetGame(null);
+        return;
+    }
+    const data = JSON.parse(savedData);
+    if (data.activeLegacy) {
+        const legacy = legacies.find(l => l.id === data.activeLegacy);
+        if (legacy) legacy.effect();
+    }
+    researchPoints = data.researchPoints;
+    citations = data.citations;
+    hIndex = data.hIndex;
+    totalGameTimeElapsed = data.totalGameTimeElapsed;
+    citationsPerSecond = data.citationsPerSecond;
+    activeLegacy = data.activeLegacy;
+    globalProductionModifier = data.globalProductionModifier || 1.0;
+    timeUntilNextEvent = data.timeUntilNextEvent || 30;
+    data.buildings.forEach(sb => {
+        const gb = buildings.find(b => b.id === sb.id);
+        if (gb) Object.assign(gb, sb);
+    });
+    if (data.milestones) {
+        data.milestones.forEach(sm => {
+            const m = hIndexMilestones.find(m => m.hIndex === sm.hIndex);
+            if (m) m.unlocked = sm.unlocked;
+        });
+    }
+    hIndexMilestones.forEach(m => {
+        if (m.unlocked) m.effect();
+    });
+    if (data.activeEvents) {
+        data.activeEvents.forEach(se => {
+            const eventConfig = randomEvents.find(e => e.name === se.name);
+            if (eventConfig) {
+                eventConfig.effect(true);
+                activeEvents.push({ ...eventConfig, duration: se.duration });
+            }
+        });
+    }
+    const timeOfflineInSeconds = (Date.now() - data.lastSaveTime) / 1000;
+    const timeRemaining = TOTAL_GAME_DURATION_SECONDS - totalGameTimeElapsed;
+    const effectiveOfflineTime = Math.min(timeOfflineInSeconds, timeRemaining);
+    if (effectiveOfflineTime > 0) {
+        recalculateRpPerSecond();
+        const offlineRpGained = effectiveOfflineTime * rpPerSecond * globalProductionModifier;
+        const offlineCitationsGained = effectiveOfflineTime * citationsPerSecond;
+        researchPoints += offlineRpGained;
+        citations += offlineCitationsGained;
+        totalGameTimeElapsed += effectiveOfflineTime;
+        alert(`欢迎回来！\n\n有效离线时间: ${Math.floor(effectiveOfflineTime)} 秒\n获得的研究点数: ${offlineRpGained.toFixed(1)}\n获得的引用数: ${offlineCitationsGained.toFixed(1)}`);
+    }
+}
+
+// =================================================================================
+// V. INITIALIZATION & APP START
+// =================================================================================
+
+let gameLoopInterval, saveGameInterval;
+
+function initializeGame() {
+    if (gameLoopInterval) clearInterval(gameLoopInterval);
+    if (saveGameInterval) clearInterval(saveGameInterval);
+    loadGame();
+    recalculateRpPerSecond();
+    renderBuildings();
+    updateDisplay();
+    gameLoopInterval = setInterval(gameLoop, 1000);
+    saveGameInterval = setInterval(saveGame, 15000);
+    console.log("Game initialized with legacy:", activeLegacy);
+}
+
+function startGame() {
+    if (isGameStarted) return;
+    isGameStarted = true;
+    floatingWidget.classList.add('game-started');
+    widgetText.classList.add('d-none');
+    widgetRpDisplay.classList.remove('d-none');
+    citations += 1;
+    initializeGame();
+    toggleView(true);
+}
+
+floatingWidget.addEventListener('click', () => {
+    if (!isGameStarted) {
+        startGame();
+    } else {
+        toggleView(true);
+    }
+});
+
+minimizeButton.addEventListener('click', () => {
+    toggleView(false);
+});
+
+manualResearchButton.addEventListener('click', () => {
+    const clickValue = parseInt(manualResearchButton.dataset.clickValue) || 1;
+    researchPoints += clickValue;
+    updateDisplay();
+});
+
+startTransmigrationButton.addEventListener('click', () => {
+    gameOverScreen.classList.add('d-none');
+    legacySelectionScreen.classList.remove('d-none');
+    const legacyOptionsContainer = document.getElementById('legacy-options-container');
+    legacyOptionsContainer.innerHTML = '';
+    const shuffledLegacies = [...legacies].sort(() => 0.5 - Math.random()).slice(0, 3);
+    shuffledLegacies.forEach(legacy => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'legacy-option';
+        optionDiv.innerHTML = `<h3>${legacy.title}</h3><p>${legacy.description}</p>`;
+        optionDiv.onclick = () => {
+            resetGame(legacy.id);
+            legacySelectionScreen.classList.add('d-none');
+            initializeGame();
+            toggleView(true);
+        };
+        legacyOptionsContainer.appendChild(optionDiv);
+    });
+});
+
+console.log("PhD Clicker ready to start.");
+
