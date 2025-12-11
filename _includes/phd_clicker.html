@@ -107,129 +107,131 @@
         最小化
       </button>
     </div>
-  </div>
-</div>
 
-<div id="dev-console" class="hidden fixed bottom-4 right-4 w-80 bg-slate-900/95 border border-indigo-500 rounded-lg shadow-2xl p-4 z-[200000]">
-  <div class="flex items-center justify-between mb-2">
-    <div class="text-sm font-bold text-indigo-200">Dev Console</div>
-    <button id="dev-close" class="text-slate-400 hover:text-white text-xs">Close</button>
-  </div>
-  <div class="space-y-2 text-xs text-slate-300">
-    <label class="flex items-center justify-between gap-2">
-      <span class="w-20">RP</span>
-      <input id="dev-rp" type="number" class="w-40 px-2 py-1 rounded bg-slate-800 border border-slate-700 text-white text-right" placeholder="100000">
-      <button id="dev-set-rp" class="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-500">Set</button>
-    </label>
-    <label class="flex items-center justify-between gap-2">
-      <span class="w-20">Citations</span>
-      <input id="dev-citations" type="number" class="w-40 px-2 py-1 rounded bg-slate-800 border border-slate-700 text-white text-right" placeholder="100">
-      <button id="dev-set-citations" class="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-500">Set</button>
-    </label>
-    <label class="flex items-center justify-between gap-2">
-      <span class="w-20">论文数</span>
-      <input id="dev-papers" type="number" class="w-40 px-2 py-1 rounded bg-slate-800 border border-slate-700 text-white text-right" placeholder="10">
-      <button id="dev-set-papers" class="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-500">Set</button>
-    </label>
-  </div>
-</div>
-
-<div id="submission-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[150000] overflow-y-auto">
-  <div class="max-w-4xl mx-auto px-4 py-10">
-    <div class="bg-slate-900 border border-indigo-800/60 rounded-2xl shadow-2xl overflow-hidden">
-      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/80">
-        <div>
-          <p class="text-xs uppercase tracking-widest text-indigo-300 mb-1">Paper Submission</p>
-          <h3 class="text-xl font-bold text-white flex items-center gap-2">
-            <i data-lucide="file-text" class="w-5 h-5 text-indigo-300"></i>
-            <span id="submission-title">发表论文 · Rebuttal</span>
-          </h3>
-        </div>
-        <div class="flex items-center gap-3">
-          <div id="submission-current-rp" class="text-xs font-mono text-slate-400 bg-slate-800 px-3 py-1 rounded-full">RP: 0</div>
-          <button id="submission-close" class="text-slate-400 hover:text-white border border-slate-700 hover:border-red-400 rounded-full w-9 h-9 flex items-center justify-center transition-colors">
-            <i data-lucide="x" class="w-4 h-4"></i>
-          </button>
-        </div>
-      </div>
-      <div id="tier-stage" class="p-6 space-y-4">
-        <div class="flex items-center justify-between text-sm text-slate-400">
-          <div class="flex items-center gap-2">
-            <span id="step1-label" class="px-2 py-1 rounded bg-indigo-900/40 text-indigo-200 text-xs font-bold uppercase">Step 1</span>
-            <span id="step1-desc">选择投稿渠道（水刊/ 普会 / 顶会），不同费用与中稿率</span>
-          </div>
-          <div id="submission-min-cost" class="text-xs text-slate-500"></div>
-        </div>
-        <div id="tier-list" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
-      </div>
-      <div id="question-stage" class="hidden p-6 space-y-3 border-t border-slate-800 bg-slate-900/70">
-        <div class="flex items-center justify-between text-sm text-slate-400">
-          <div class="flex items-center gap-2">
-            <span id="step2-label" class="px-2 py-1 rounded bg-indigo-900/40 text-indigo-200 text-xs font-bold uppercase">Step 2</span>
-            <span id="question-tier-label">Rebuttal Q&A</span>
-          </div>
-          <div class="flex items-center gap-3 text-xs">
-            <span id="question-progress" class="text-slate-400">Q 1/3</span>
-            <span id="question-chance" class="text-emerald-300 font-mono">80%</span>
-          </div>
-        </div>
-        <div class="rounded-xl border border-slate-800 bg-slate-800/60 shadow-lg p-4">
-          <div class="flex items-center gap-3 mb-3">
-            <div id="question-reviewer-badge" class="w-10 h-10 rounded-full bg-red-500/20 border border-red-400/60 flex items-center justify-center text-red-200 font-bold">#2</div>
-            <div class="leading-tight">
-              <div id="question-reviewer-name" class="text-sm font-semibold text-white">Reviewer #2</div>
-            </div>
-          </div>
-          <div id="question-text" class="text-lg text-slate-100 font-semibold leading-snug mb-3">问题内容</div>
-          <div id="options-container" class="space-y-2"></div>
-          <div id="question-feedback" class="hidden mt-3 text-sm text-emerald-300"></div>
-          <div class="mt-4 flex justify-end">
-            <button id="question-next-btn" class="hidden px-4 py-2 rounded-lg border border-indigo-500 text-indigo-100 bg-indigo-900/40 hover:bg-indigo-800/60 transition-colors text-sm font-semibold">下一题</button>
-          </div>
-        </div>
-      </div>
-      <div id="result-stage" class="hidden p-6 border-t border-slate-800 bg-slate-900/80">
-        <div id="result-letter" class="rounded-xl border border-slate-800 bg-slate-800/70 shadow-lg p-4 mb-4">
-          <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
-            <span>From: review@conference.org</span>
-            <span id="result-letter-date">Today</span>
-          </div>
-          <div id="result-letter-subject" class="text-sm font-semibold text-white mb-2">[Decision] Your Submission</div>
-          <div id="result-letter-body" class="text-sm text-slate-200 leading-relaxed whitespace-pre-line">正文</div>
-        </div>
-        <div id="result-settlement" class="hidden">
-          <div class="flex items-center gap-3 mb-3">
-            <div id="result-icon" class="w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold bg-emerald-500/20 text-emerald-200 border border-emerald-400/60">A</div>
+    <!-- Modals and Dev Console are now INSIDE the game container -->
+    <div id="submission-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[2147484001] overflow-y-auto">
+      <div class="max-w-4xl mx-auto px-4 py-10">
+        <div class="bg-slate-900 border border-indigo-800/60 rounded-2xl shadow-2xl overflow-hidden">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/80">
             <div>
-              <div id="result-title" class="text-2xl font-bold text-emerald-300">Accept!</div>
-              <div id="result-detail" class="text-sm text-slate-300">Reviewers loved your rebuttal.</div>
+              <p class="text-xs uppercase tracking-widest text-indigo-300 mb-1">Paper Submission</p>
+              <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                <i data-lucide="file-text" class="w-5 h-5 text-indigo-300"></i>
+                <span id="submission-title">发表论文 · Rebuttal</span>
+              </h3>
+            </div>
+            <div class="flex items-center gap-3">
+              <div id="submission-current-rp" class="text-xs font-mono text-slate-400 bg-slate-800 px-3 py-1 rounded-full">RP: 0</div>
+              <button id="submission-close" class="text-slate-400 hover:text-white border border-slate-700 hover:border-red-400 rounded-full w-9 h-9 flex items-center justify-center transition-colors">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
             </div>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-            <div class="p-3 rounded-lg border border-slate-800 bg-slate-800/60">
-              <div class="text-xs text-slate-400 mb-1">会议</div>
-              <div id="result-tier" class="text-sm font-semibold text-white">NeurIPS</div>
+          <div id="tier-stage" class="p-6 space-y-4">
+            <div class="flex items-center justify-between text-sm text-slate-400">
+              <div class="flex items-center gap-2">
+                <span id="step1-label" class="px-2 py-1 rounded bg-indigo-900/40 text-indigo-200 text-xs font-bold uppercase">Step 1</span>
+                <span id="step1-desc">选择投稿渠道（水刊/ 普会 / 顶会），不同费用与中稿率</span>
+              </div>
+              <div id="submission-min-cost" class="text-xs text-slate-500"></div>
             </div>
-            <div class="p-3 rounded-lg border border-slate-800 bg-slate-800/60">
-              <div class="text-xs text-slate-400 mb-1">最终中稿率</div>
-              <div id="result-chance" class="text-sm font-semibold text-white">45%</div>
+            <div id="tier-list" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
+          </div>
+          <div id="question-stage" class="hidden p-6 space-y-3 border-t border-slate-800 bg-slate-900/70">
+            <div class="flex items-center justify-between text-sm text-slate-400">
+              <div class="flex items-center gap-2">
+                <span id="step2-label" class="px-2 py-1 rounded bg-indigo-900/40 text-indigo-200 text-xs font-bold uppercase">Step 2</span>
+                <span id="question-tier-label">Rebuttal Q&A</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs">
+                <span id="question-progress" class="text-slate-400">Q 1/3</span>
+                <span id="question-chance" class="text-emerald-300 font-mono">80%</span>
+              </div>
             </div>
-            <div class="p-3 rounded-lg border border-slate-800 bg-slate-800/60">
-              <div class="text-xs text-slate-400 mb-1">判定</div>
-              <div id="result-roll" class="text-sm font-semibold text-white">Roll 0.32</div>
+            <div class="rounded-xl border border-slate-800 bg-slate-800/60 shadow-lg p-4">
+              <div class="flex items-center gap-3 mb-3">
+                <div id="question-reviewer-badge" class="w-10 h-10 rounded-full bg-red-500/20 border border-red-400/60 flex items-center justify-center text-red-200 font-bold">#2</div>
+                <div class="leading-tight">
+                  <div id="question-reviewer-name" class="text-sm font-semibold text-white">Reviewer #2</div>
+                </div>
+              </div>
+              <div id="question-text" class="text-lg text-slate-100 font-semibold leading-snug mb-3">问题内容</div>
+              <div id="options-container" class="space-y-2"></div>
+              <div id="question-feedback" class="hidden mt-3 text-sm text-emerald-300"></div>
+              <div class="mt-4 flex justify-end">
+                <button id="question-next-btn" class="hidden px-4 py-2 rounded-lg border border-indigo-500 text-indigo-100 bg-indigo-900/40 hover:bg-indigo-800/60 transition-colors text-sm font-semibold">下一题</button>
+              </div>
             </div>
           </div>
-          <div id="result-rewards" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4"></div>
-          <div class="flex items-center justify-between">
-            <div id="result-flavor" class="text-sm text-slate-400">审稿人：虽然没看懂，但感觉很厉害。</div>
-            <div class="flex gap-2">
-              <button id="result-button" class="px-4 py-2 rounded-lg border border-indigo-600 text-indigo-200 hover:bg-indigo-800/60 transition-colors">再投一篇</button>
-              <button id="submission-close-bottom" class="px-3 py-2 rounded-lg border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 transition-colors">关闭</button>
+          <div id="result-stage" class="hidden p-6 border-t border-slate-800 bg-slate-900/80">
+            <div id="result-letter" class="rounded-xl border border-slate-800 bg-slate-800/70 shadow-lg p-4 mb-4">
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                <span>From: review@conference.org</span>
+                <span id="result-letter-date">Today</span>
+              </div>
+              <div id="result-letter-subject" class="text-sm font-semibold text-white mb-2">[Decision] Your Submission</div>
+              <div id="result-letter-body" class="text-sm text-slate-200 leading-relaxed whitespace-pre-line">正文</div>
+            </div>
+            <div id="result-settlement" class="hidden">
+              <div class="flex items-center gap-3 mb-3">
+                <div id="result-icon" class="w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold bg-emerald-500/20 text-emerald-200 border border-emerald-400/60">A</div>
+                <div>
+                  <div id="result-title" class="text-2xl font-bold text-emerald-300">Accept!</div>
+                  <div id="result-detail" class="text-sm text-slate-300">Reviewers loved your rebuttal.</div>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                <div class="p-3 rounded-lg border border-slate-800 bg-slate-800/60">
+                  <div class="text-xs text-slate-400 mb-1">会议</div>
+                  <div id="result-tier" class="text-sm font-semibold text-white">NeurIPS</div>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-800 bg-slate-800/60">
+                  <div class="text-xs text-slate-400 mb-1">最终中稿率</div>
+                  <div id="result-chance" class="text-sm font-semibold text-white">45%</div>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-800 bg-slate-800/60">
+                  <div class="text-xs text-slate-400 mb-1">判定</div>
+                  <div id="result-roll" class="text-sm font-semibold text-white">Roll 0.32</div>
+                </div>
+              </div>
+              <div id="result-rewards" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4"></div>
+              <div class="flex items-center justify-between">
+                <div id="result-flavor" class="text-sm text-slate-400">审稿人：虽然没看懂，但感觉很厉害。</div>
+                <div class="flex gap-2">
+                  <button id="result-button" class="px-4 py-2 rounded-lg border border-indigo-600 text-indigo-200 hover:bg-indigo-800/60 transition-colors">再投一篇</button>
+                  <button id="submission-close-bottom" class="px-3 py-2 rounded-lg border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 transition-colors">关闭</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <div id="dev-console" class="hidden fixed bottom-4 right-4 w-80 bg-slate-900/95 border border-indigo-500 rounded-lg shadow-2xl p-4 z-[2147484002]">
+      <div class="flex items-center justify-between mb-2">
+        <div class="text-sm font-bold text-indigo-200">Dev Console</div>
+        <button id="dev-close" class="text-slate-400 hover:text-white text-xs">Close</button>
+      </div>
+      <div class="space-y-2 text-xs text-slate-300">
+        <label class="flex items-center justify-between gap-2">
+          <span class="w-20">RP</span>
+          <input id="dev-rp" type="number" class="w-40 px-2 py-1 rounded bg-slate-800 border border-slate-700 text-white text-right" placeholder="100000">
+          <button id="dev-set-rp" class="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-500">Set</button>
+        </label>
+        <label class="flex items-center justify-between gap-2">
+          <span class="w-20">Citations</span>
+          <input id="dev-citations" type="number" class="w-40 px-2 py-1 rounded bg-slate-800 border border-slate-700 text-white text-right" placeholder="100">
+          <button id="dev-set-citations" class="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-500">Set</button>
+        </label>
+        <label class="flex items-center justify-between gap-2">
+          <span class="w-20">论文数</span>
+          <input id="dev-papers" type="number" class="w-40 px-2 py-1 rounded bg-slate-800 border border-slate-700 text-white text-right" placeholder="10">
+          <button id="dev-set-papers" class="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-500">Set</button>
+        </label>
+      </div>
+    </div>
+
   </div>
 </div>
 
