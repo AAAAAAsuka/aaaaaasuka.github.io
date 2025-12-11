@@ -8,6 +8,13 @@ layout: compress
     {% include head.html %}
     {% include head/custom.html %}
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = Object.assign({}, tailwind.config, {
+        corePlugins: Object.assign({}, tailwind.config?.corePlugins, {
+          preflight: false
+        })
+      });
+    </script>
   </head>
 
   <body>
