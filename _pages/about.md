@@ -18,8 +18,6 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 # About Me
 
-## PhD Clicker (play here)
-
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="/game.css">
 <script src="/data.zh.js"></script>
