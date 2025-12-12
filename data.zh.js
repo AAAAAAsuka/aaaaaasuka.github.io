@@ -217,7 +217,7 @@ window.GAME_DATA_ZH = {
                 questionConfig: { total: 5, funny: 3, tech: 2 },
                 rewardCitations: 1000,
                 rewardMultiplier: 20,
-                targets: ['NeurIPS', 'ICML', 'CVPR', 'ICLR', 'AAAI']
+                targets: ['NeurIPS', 'ICML', 'CVPR', 'ICLR']
             }
         ],
         flavorText: {
@@ -233,7 +233,7 @@ window.GAME_DATA_ZH = {
                 '审稿人认为你的 Related Work 写得像营销号文章。',
                 '拒稿理由：“缺乏 Novelty”（翻译：我没看懂）。',
                 'Area Chair 说你的格式不对，建议回去重修 Word。',
-                '审稿人向你提了 10 个问题，并质疑了你的心理问题。',
+                '审稿人向你提了 40 个问题，并质疑了你的心理问题。',
                 '虽然被拒了，但审稿人祝你身体健康。'
             ]
         },
