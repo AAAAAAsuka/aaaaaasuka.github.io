@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="/game.css">
-<script src="/data.zh.js"></script>
-<script src="/data.en.js"></script>
+<link rel="stylesheet" href="/phd_clicker_game/game.css">
+<script src="/phd_clicker_game/data.zh.js"></script>
+<script src="/phd_clicker_game/data.en.js"></script>
 
 <!-- Floating widget trigger -->
 <div id="phd-clicker-app" class="font-sans">
@@ -206,33 +206,32 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div id="dev-console" class="hidden fixed bottom-4 right-4 w-80 bg-slate-900/95 border border-indigo-500 rounded-lg shadow-2xl p-4 z-[2147484002]">
-      <div class="flex items-center justify-between mb-2">
-        <div class="text-sm font-bold text-indigo-200">Dev Console</div>
-        <button id="dev-close" class="text-slate-400 hover:text-white text-xs">Close</button>
+      <div id="dev-console" class="hidden fixed bottom-4 right-4 w-80 bg-slate-900/95 border border-indigo-500 rounded-lg shadow-2xl p-4 z-[2147484002]">
+        <div class="flex items-center justify-between mb-2">
+          <div class="text-sm font-bold text-indigo-200">Dev Console</div>
+          <button id="dev-close" class="text-slate-400 hover:text-white text-xs">Close</button>
+        </div>
+        <div class="space-y-2 text-xs text-slate-300">
+          <label class="flex items-center justify-between gap-2">
+            <span class="w-20">RP</span>
+            <input id="dev-rp" type="number" class="w-40 px-2 py-1 rounded bg-slate-800 border border-slate-700 text-white text-right" placeholder="100000">
+            <button id="dev-set-rp" class="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-500">Set</button>
+          </label>
+          <label class="flex items-center justify-between gap-2">
+            <span class="w-20">Citations</span>
+            <input id="dev-citations" type="number" class="w-40 px-2 py-1 rounded bg-slate-800 border border-slate-700 text-white text-right" placeholder="100">
+            <button id="dev-set-citations" class="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-500">Set</button>
+          </label>
+          <label class="flex items-center justify-between gap-2">
+            <span class="w-20">论文数</span>
+            <input id="dev-papers" type="number" class="w-40 px-2 py-1 rounded bg-slate-800 border border-slate-700 text-white text-right" placeholder="10">
+            <button id="dev-set-papers" class="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-500">Set</button>
+          </label>
+        </div>
       </div>
-      <div class="space-y-2 text-xs text-slate-300">
-        <label class="flex items-center justify-between gap-2">
-          <span class="w-20">RP</span>
-          <input id="dev-rp" type="number" class="w-40 px-2 py-1 rounded bg-slate-800 border border-slate-700 text-white text-right" placeholder="100000">
-          <button id="dev-set-rp" class="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-500">Set</button>
-        </label>
-        <label class="flex items-center justify-between gap-2">
-          <span class="w-20">Citations</span>
-          <input id="dev-citations" type="number" class="w-40 px-2 py-1 rounded bg-slate-800 border border-slate-700 text-white text-right" placeholder="100">
-          <button id="dev-set-citations" class="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-500">Set</button>
-        </label>
-        <label class="flex items-center justify-between gap-2">
-          <span class="w-20">论文数</span>
-          <input id="dev-papers" type="number" class="w-40 px-2 py-1 rounded bg-slate-800 border border-slate-700 text-white text-right" placeholder="10">
-          <button id="dev-set-papers" class="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-500">Set</button>
-        </label>
-      </div>
-    </div>
 
-  </div>
+    </div>
 </div>
 
-<script src="/game.js"></script>
+<script src="/phd_clicker_game/game.js"></script>
