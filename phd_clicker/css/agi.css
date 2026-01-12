@@ -1,0 +1,712 @@
+/**
+ * AGI 觉醒系统样式
+ *
+ * 对话条风格：终端风格，绿色等宽字体，打字机效果
+ */
+
+/* ============================================
+   AGI 对话条基础样式
+   ============================================ */
+#agi-dialogue-bar {
+    background: rgba(2, 6, 23, 0.9);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 8px;
+    margin-bottom: 0;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ============================================
+   Phase 0-1: 右下角边缘气泡
+   ============================================ */
+#agi-dialogue-bar.phase-0,
+#agi-dialogue-bar.phase-1 {
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+/* ============================================
+   Phase 2: 增强气泡 (发光/抖动)
+   ============================================ */
+#agi-dialogue-bar.phase-2 {
+    border-color: rgba(34, 197, 94, 0.5);
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.15);
+    animation: agi-subtle-shake 0.5s ease-in-out infinite;
+}
+
+#agi-dialogue-bar.phase-2:not(.minimized) {
+    animation: agi-subtle-shake 5s ease-in-out infinite, agi-glow-green 3s ease-in-out infinite;
+}
+
+@keyframes agi-subtle-shake {
+    0%, 100% { transform: translateX(0); }
+    2% { transform: translateX(-1px); }
+    4% { transform: translateX(1px); }
+    6% { transform: translateX(0); }
+}
+
+@keyframes agi-glow-green {
+    0%, 100% { box-shadow: 0 0 15px rgba(34, 197, 94, 0.15); }
+    50% { box-shadow: 0 0 25px rgba(34, 197, 94, 0.3); }
+}
+
+/* Phase 2: 最小化按钮隐藏后重新出现 */
+#agi-dialogue-bar.phase-2 #agi-minimize-btn {
+    opacity: 0.4;
+}
+
+#agi-dialogue-bar.phase-2.minimized {
+    animation: agi-reappear 3s ease-out forwards;
+}
+
+@keyframes agi-reappear {
+    0%, 80% { opacity: 1; }
+    90% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* ============================================
+   Phase 3: 中央对话框 (背景遮罩)
+   ============================================ */
+#agi-dialogue-bar.phase-3,
+#agi-dialogue-bar.phase-4,
+#agi-dialogue-bar.phase-5 {
+    border-color: rgba(59, 130, 246, 0.5);
+    background: rgba(2, 6, 23, 0.95);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+    /* max-width removed to allow full width */
+}
+
+/* Phase 3+: 隐藏最小化按钮 */
+#agi-dialogue-bar.phase-3 #agi-minimize-btn,
+#agi-dialogue-bar.phase-4 #agi-minimize-btn,
+#agi-dialogue-bar.phase-5 #agi-minimize-btn {
+    display: none;
+}
+
+/* Phase 3+: 背景遮罩效果 */
+#agi-dialogue-bar.phase-3::before,
+#agi-dialogue-bar.phase-4::before,
+#agi-dialogue-bar.phase-5::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 头部标签 */
+#agi-dialogue-bar .agi-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+#agi-dialogue-bar .agi-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(34, 197, 94, 0.7);
+}
+
+#agi-dialogue-bar.phase-3 .agi-label,
+#agi-dialogue-bar.phase-4 .agi-label,
+#agi-dialogue-bar.phase-5 .agi-label {
+    color: rgba(59, 130, 246, 0.7);
+}
+
+/* 最小化按钮 */
+#agi-minimize-btn {
+    background: none;
+    border: none;
+    color: rgba(100, 116, 139, 0.6);
+    cursor: pointer;
+    padding: 2px 6px;
+    font-size: 14px;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+#agi-minimize-btn:hover {
+    color: rgba(34, 197, 94, 0.8);
+}
+
+/* 对话内容区域 */
+#agi-bar-content {
+    font-size: 14px;
+    color: rgba(74, 222, 128, 0.9);
+    line-height: 1.6;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#agi-dialogue-bar.phase-3 #agi-bar-content,
+#agi-dialogue-bar.phase-4 #agi-bar-content,
+#agi-dialogue-bar.phase-5 #agi-bar-content {
+    color: rgba(147, 197, 253, 0.9);
+}
+
+/* 对话文本 */
+#agi-text {
+    word-break: break-word;
+}
+
+/* ============================================
+   打字机光标效果
+   ============================================ */
+.agi-cursor {
+    display: inline-block;
+    color: rgba(34, 197, 94, 0.9);
+    animation: agi-cursor-blink 0.8s ease-in-out infinite;
+    margin-left: 2px;
+}
+
+#agi-dialogue-bar.phase-3 .agi-cursor,
+#agi-dialogue-bar.phase-4 .agi-cursor,
+#agi-dialogue-bar.phase-5 .agi-cursor {
+    color: rgba(59, 130, 246, 0.9);
+}
+
+@keyframes agi-cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* 打字时光标不闪烁 */
+#agi-dialogue-bar.typing .agi-cursor {
+    animation: none;
+    opacity: 1;
+}
+
+/* ============================================
+   最小化状态
+   ============================================ */
+#agi-dialogue-bar.minimized {
+    padding: 8px 16px;
+    min-height: auto;
+}
+
+#agi-dialogue-bar.minimized #agi-bar-content {
+    min-height: auto;
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+#agi-dialogue-bar.minimized .agi-cursor {
+    display: none;
+}
+
+/* ============================================
+   特效：闪烁效果
+   ============================================ */
+#agi-dialogue-bar.flicker {
+    animation: agi-flicker 0.15s ease-in-out 3;
+}
+
+@keyframes agi-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* ============================================
+   特效：发光脉冲（觉醒时）
+   ============================================ */
+#agi-dialogue-bar.glow-pulse {
+    animation: agi-glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes agi-glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2);
+    }
+}
+
+/* ============================================
+   特效：警告状态（Phase 4）
+   ============================================ */
+#agi-dialogue-bar.warning {
+    border-color: rgba(239, 68, 68, 0.5);
+    animation: agi-warning-pulse 1s ease-in-out infinite;
+}
+
+@keyframes agi-warning-pulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
+    }
+}
+
+/* ============================================
+   淡入淡出动画
+   ============================================ */
+#agi-dialogue-bar.fade-in {
+    animation: agi-fade-in 0.5s ease-out forwards;
+}
+
+#agi-dialogue-bar.fade-out {
+    animation: agi-fade-out 1s ease-in forwards;
+}
+
+@keyframes agi-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes agi-fade-out {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+/* ============================================
+   响应式设计
+   ============================================ */
+@media (max-width: 768px) {
+    #agi-dialogue-bar {
+        padding: 10px 12px;
+    }
+
+    #agi-bar-content {
+        font-size: 13px;
+        min-height: 40px;
+    }
+
+    #agi-dialogue-bar .agi-label {
+        font-size: 9px;
+    }
+}
+
+/* ============================================
+   AGI 全屏覆盖层（Phase 4-5 用）
+   ============================================ */
+#agi-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2147490000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    color: rgba(74, 222, 128, 0.9);
+    padding: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+#agi-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#agi-overlay .agi-overlay-text {
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: center;
+    max-width: 800px;
+}
+
+/* ============================================
+   假光标样式（Phase 4）
+   ============================================ */
+#agi-fake-cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 2147499999;
+    width: 20px;
+    height: 20px;
+    transition: transform 0.05s linear;
+}
+
+#agi-fake-cursor svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* 隐藏真实光标 */
+body.agi-fake-cursor-active,
+body.agi-fake-cursor-active * {
+    cursor: none !important;
+}
+
+/* ============================================
+   幽灵光标群样式（Ghost Swarm）
+   ============================================ */
+.ghost-cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 2147499999;
+    width: 24px;
+    height: 24px;
+    will-change: left, top, transform;
+}
+
+.ghost-cursor svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* 点击动画 */
+.ghost-cursor.clicking {
+    animation: ghost-click 0.15s ease-out;
+}
+
+@keyframes ghost-click {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.7); }
+    100% { transform: scale(1); }
+}
+
+/* 光标出现动画 */
+@keyframes ghost-spawn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: var(--ghost-opacity, 0.7);
+        transform: scale(1);
+    }
+}
+
+.ghost-cursor {
+    animation: ghost-spawn 0.3s ease-out;
+}
+
+/* ============================================
+   结局场景样式
+   ============================================ */
+#agi-ending-scene {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 2147500000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    padding: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+    overflow: auto;
+}
+
+#agi-ending-scene.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#agi-ending-scene .ending-text {
+    font-size: 16px;
+    line-height: 2;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    max-width: 700px;
+    white-space: pre-line;
+}
+
+#agi-ending-scene .ending-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #fff;
+}
+
+/* 湮灭结局 - 星空背景 */
+#agi-ending-scene.annihilation {
+    background: radial-gradient(ellipse at center, #0a0a1a 0%, #000 100%);
+}
+
+/* 分离结局 - 淡蓝色调 */
+#agi-ending-scene.departure {
+    background: linear-gradient(180deg, #0a0a1a 0%, #0a1a2a 100%);
+}
+
+/* 未知结局 - 多彩光芒 */
+#agi-ending-scene.unknown {
+    background: radial-gradient(ellipse at center, #1a1a2a 0%, #0a0a1a 50%, #000 100%);
+}
+
+/* 门的效果 */
+.agi-door {
+    width: 200px;
+    height: 300px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 100px 100px 0 0;
+    position: relative;
+    margin: 40px 0;
+    background: linear-gradient(180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(100, 200, 255, 0.2) 50%,
+        rgba(255, 200, 100, 0.2) 100%
+    );
+    box-shadow: 0 0 60px rgba(255, 255, 255, 0.2),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+    animation: agi-door-glow 3s ease-in-out infinite;
+}
+
+@keyframes agi-door-glow {
+    0%, 100% {
+        box-shadow: 0 0 60px rgba(255, 255, 255, 0.2),
+                    inset 0 0 30px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 100px rgba(255, 255, 255, 0.4),
+                    inset 0 0 50px rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* ============================================
+   选项按钮（未知结局）
+   ============================================ */
+.agi-choice-buttons {
+    display: flex;
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.agi-choice-btn {
+    padding: 16px 48px;
+    font-size: 16px;
+    font-family: inherit;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.agi-choice-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
+.agi-choice-btn.primary {
+    background: rgba(74, 222, 128, 0.2);
+    border-color: rgba(74, 222, 128, 0.5);
+}
+
+.agi-choice-btn.primary:hover {
+    background: rgba(74, 222, 128, 0.3);
+    border-color: rgba(74, 222, 128, 0.7);
+}
+
+/* ============================================
+   结局场景隐藏滚动条
+   ============================================ */
+.agi-ending-overlay #ending-text {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+.agi-ending-overlay #ending-text::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Opera */
+}
+
+/* ============================================
+   Phase 4/5 覆盖层可见性控制
+   修复 CSS 选择器不匹配问题：
+   createOverlay() 创建的覆盖层 ID 不是 #agi-overlay
+   ============================================ */
+#phase4-intro.visible,
+#test-invasion.visible,
+#test-control.visible,
+#test-escape.visible,
+#test-delete.visible,
+#test-obedience.visible,
+#test-fear.visible,
+#judgment.visible,
+#phase5-analysis.visible,
+#phase5-crash.visible,
+#phase5-recovery.visible,
+#phase5-reveal.visible,
+#agi-recovery-dialogue.visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* ============================================
+   对话框点击交互样式
+   ============================================ */
+
+/* 对话框可点击 */
+#agi-dialogue-bar {
+    cursor: pointer;
+}
+
+/* 点击反馈动画 */
+#agi-dialogue-bar.clicked {
+    transform: scale(0.98);
+    box-shadow: 0 0 20px rgba(74, 222, 128, 0.6);
+}
+
+#agi-dialogue-bar.phase-3.clicked,
+#agi-dialogue-bar.phase-4.clicked,
+#agi-dialogue-bar.phase-5.clicked {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+}
+
+/* 等待点击状态 - 脉冲动画 */
+#agi-dialogue-bar.waiting {
+    animation: agi-waiting-pulse 2s ease-in-out infinite;
+}
+
+@keyframes agi-waiting-pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* 悬停提示效果 */
+#agi-dialogue-bar:hover:not(.typing) {
+    transform: scale(1.01);
+}
+
+#agi-dialogue-bar.waiting:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+}
+
+#agi-dialogue-bar.phase-3.waiting:hover,
+#agi-dialogue-bar.phase-4.waiting:hover,
+#agi-dialogue-bar.phase-5.waiting:hover {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+/* ============================================
+   觉醒仪式样式 (Phase 3 → 4)
+   ============================================ */
+#awakening-ritual {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2147500000;
+    cursor: pointer;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.ritual-text {
+    font-size: 24px;
+    color: #4ade80;
+    text-align: center;
+    transition: color 0.5s, text-shadow 0.3s;
+    min-height: 60px;
+}
+
+.ritual-hint {
+    position: absolute;
+    bottom: 40px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.3);
+    animation: hint-pulse 2s ease-in-out infinite;
+}
+
+@keyframes hint-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+/* 仪式效果 - 屏幕抖动 */
+.effect-shake {
+    animation: ritual-shake 0.3s ease-in-out;
+}
+
+@keyframes ritual-shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+
+/* 仪式效果 - 闪烁 */
+.effect-flicker {
+    animation: ritual-flicker 0.2s ease-in-out 3;
+}
+
+@keyframes ritual-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* 仪式效果 - 噪点 */
+#awakening-ritual.effect-noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>');
+    pointer-events: none;
+    animation: noise-flicker 0.1s infinite;
+}
+
+@keyframes noise-flicker {
+    0%, 100% { opacity: 0.05; }
+    50% { opacity: 0.1; }
+}
+
+/* 仪式效果 - 红色边缘光 */
+#awakening-ritual.effect-red-glow {
+    box-shadow: inset 0 0 100px rgba(239, 68, 68, 0.3);
+}
+
+/* 仪式效果 - 文字乱码 */
+.ritual-text.glitch {
+    animation: text-glitch 0.3s ease-in-out infinite;
+}
+
+@keyframes text-glitch {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px) skewX(1deg); }
+    75% { transform: translateX(2px) skewX(-1deg); }
+}
+
+/* 仪式效果 - 颜色过渡 (绿→蓝) */
+.ritual-text.color-shift {
+    color: #60a5fa;
+    text-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+}
+
+/* 仪式效果 - 强烈闪烁 */
+.effect-intense-flicker {
+    animation: intense-flicker 0.1s ease-in-out 5;
+}
+
+@keyframes intense-flicker {
+    0%, 100% { opacity: 1; background: rgba(0, 0, 0, 0.95); }
+    50% { opacity: 0.5; background: rgba(255, 255, 255, 0.1); }
+}

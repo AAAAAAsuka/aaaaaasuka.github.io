@@ -73,5 +73,3 @@ I am currently a Ph.D. candidate at Pennsylvania State University, advised by [D
 - *2025.05 - 2025.08*, Research Intern at Security-Flow, ByteDance, San Jose, USA. Advisor: Dr.Yang Bai and Dr.Xinyu Xing.
 - *2024.05 - 2024.08*, Research Intern at CR/RSI2-NA Department, Robert Bosch LLC, Sunnyvale, USA. Advisor: Dr.Sashidhar Jakkamsetti.
 - *2021.03 - 2022.03*, Research Intern at Search Strategy Department, Baidu Inc, Beijing, China. Advisor: Dr.Yiding Liu.
-
-{% include phd_clicker.html %}
