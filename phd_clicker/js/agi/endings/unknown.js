@@ -8,6 +8,13 @@
 import { State, Runtime } from '../../state.js';
 import * as Departure from './departure.js';
 
+// 动态获取资源基础路径，兼容独立运行和嵌入主网站两种情况
+function getAssetPath(filename) {
+    const moduleURL = new URL(import.meta.url);
+    const basePath = moduleURL.pathname.substring(0, moduleURL.pathname.lastIndexOf('/js/'));
+    return `${basePath}/asset/${filename}`;
+}
+
 // 音频播放器实例
 let bgmAudio = null;
 // 字幕相关
@@ -37,7 +44,7 @@ let overlay = null;
  */
 function tryPlayBGM() {
     try {
-        bgmAudio = new Audio('asset/superposition.mp3');
+        bgmAudio = new Audio(getAssetPath('superposition.mp3'));
         bgmAudio.loop = true;
         bgmAudio.volume = 0.3;
 
@@ -117,7 +124,7 @@ function parseSRT(srtText) {
  */
 async function loadSubtitles() {
     try {
-        const response = await fetch('asset/superposition.srt');
+        const response = await fetch(getAssetPath('superposition.srt'));
         if (!response.ok) {
             console.log('[AGI Unknown] Subtitle file not available');
             return;
